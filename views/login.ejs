@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <% include ./partials/header %>
+    <body>                
+        <!-- Login Start -->
+        <form action="login" id="reg-form" autocomplete="off" method="POST">
+        <div class="login">
+            <div class="container-fluid">
+                <div class="row">                    
+                    <div class="col-lg-6">
+                        <div class="login-form">
+                            <% include ./partials/messages %> 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>E-mail / Username</label>
+                                    <input class="form-control" type="text" name="email" placeholder="E-mail" 
+                                    value="<%= typeof email != 'undefined' ? email : '' %>"> 
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Password</label>
+                                    <input class="form-control" type="password" name="password" placeholder="Password" 
+                                    value="<%= typeof password != 'undefined' ? password :'' %>"> 
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="newaccount">
+                                        <label class="custom-control-label" for="newaccount">Keep me signed in</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn" value="submit">Submit</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <% include ./partials/footer %>
+    </body>
+</html>

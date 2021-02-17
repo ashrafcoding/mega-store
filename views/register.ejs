@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <% include ./partials/header %>
+<body>
+    
+    <!-- Login Start -->
+    <form action="register" id="reg-form" autocomplete="off" method="POST">
+        <div class="login">
+              
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="register-form">
+                            <% include ./partials/messages %>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>First Name</label>
+                                    
+                                    <input class="form-control" type="text" name="name" placeholder="First Name"
+                                        value="<%= typeof name != 'undefined' ? name : '' %>">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>E-mail</label>
+                                    <input class="form-control" type="text" name="email" placeholder="E-mail"
+                                        value="<%= typeof email != 'undefined' ? email : '' %>">
+                                                                                                                            
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Password</label>
+                                    <input class="form-control" type="password" name="password" placeholder="Password"
+                                        value="<%= typeof password != 'undefined' ? password : '' %>">
+                                        <div class= "password.error"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Retype Password</label>
+                                    <input class="form-control" type="password" name="password2" placeholder="Password"
+                                        value="<%= typeof password2 != 'undefined' ? password2 : '' %>">
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn" value="submit">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>               
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </form>
+    <!-- Login End -->
+    <% include ./partials/footer %>
+</body>
+
+</html>

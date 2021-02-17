@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ./partials/header %>
+
+    <body>
+        <!-- Checkout Start -->
+        <div class="checkout">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="checkout-inner">
+                            <div class="billing-address">
+                                <h2>Billing Address</h2>
+                                <% include ./partials/checkoutmessages %>
+                                    <% if(user.address) {%>
+                                        <div id="message"></div>
+                                        <div>
+                                            <p>
+                                                <%= `${user.name} ${user.secondName} ` %>
+                                            </p>
+                                            <p>
+                                                <%= `address :  ${user.address} ${user.city}` %>
+                                            </p>
+                                        </div>
+                                        <% }else{ %>
+                                            <form action="/checkout/update" method="POST">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>First Name</label>
+                                                        <input class="form-control" id="firstName" type="text"
+                                                            name="firstName" placeholder="First Name" />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>Last Name"</label>
+                                                        <input class="form-control" id="secondName" type="text"
+                                                            name="secondName" placeholder="Last Name" />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>E-mail</label>
+                                                        <input class="form-control" id="email" type="text" name="email"
+                                                            placeholder="E-mail" />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>Mobile No</label>
+                                                        <input class="form-control" id="phone" type="text" name="phone"
+                                                            placeholder="Mobile No" />
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label>Address</label>
+                                                        <input class="form-control" id="address" type="text"
+                                                            name="address" placeholder="Address" />
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label>Address2</label>
+                                                        <input class="form-control" id="city" type="text" name="city"
+                                                            placeholder="Address2" />
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <button class="btn" id="update-account">
+                                                            Update Account
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="checkout-inner">
+                            <div class="checkout-summary">
+                                <h1>Cart Total</h1>
+                                <% for ( let y=0; y < items.length ; y +=1){ %>
+                                    <p>
+                                        <small>
+                                            <%= items[y].name%>
+                                        </small>
+                                        <span>$<%=parseInt((items[y].price).slice(1)) *items[y].amount%></span>
+                                    </p>
+                                    <% } %>
+                                        <% let sum=0 %>
+                                            <% items.forEach(item=>{sum+=item.amount
+                                                * parseInt((item.price).slice(1))}) %>
+                                                <p class="sub-total">Sub Total<span>$<%=sum %></span></p>
+                                                <p class="ship-cost">Shipping Cost<span>$5</span></p>
+                                                <h2 id="grandTotal">Grand Total<span>$<%= sum+5 %></span></h2>
+                            </div>
+                            <div class="checkout-payment">
+                                <% if (user.address){ %>
+                                    <div class="checkout-btn" id="checkout-button">
+                                        <button id="checkout-button">Place Order</button>
+                                    </div>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Checkout End -->
+        <% include ./partials/footer %>
+            <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+            <script src="https://js.stripe.com/v3/"></script>
+            <script src="/js/stripecheckout.js"></script>
+    </body>
+
+</html>
