@@ -5,5 +5,8 @@ const homeController = require('../controllers/HomeController')
 
 /* GET home page. */
 router.get('/', homeController.getHome)
-//router.get('/', homeController.getCategory)
+
+
+router.get('/contact', homeController.getContact)
+
 module.exports = router;

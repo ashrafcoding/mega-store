@@ -10,3 +10,7 @@ exports.getHome = (req,res,next) => {
     })
 }
 
+exports.getContact = (req, res) => {
+    res.render("contact")
+}
+

@@ -1,3 +1,4 @@
+// import the required modules
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -10,12 +11,14 @@ const SessionStore = require("connect-mongodb-session")(session);
 const dotenv = require("dotenv");
 dotenv.config();
 
+// import the routes
 const indexRouter = require("./routes/HomeRoute");
 const usersRouter = require("./routes/usersroute");
 const productRouter = require("./routes/ProductRoute");
 const authRouter = require("./routes/authroute");
 const cartRouter = require("./routes/cartroute");
 const checkoutRouter = require("./routes/checkoutroute");
+const wishListRouter = require ("./routes/wishlistroute")
 const { requireAuth, checkUser } = require("./controllers/authmiddleware");
 
 const app = express();
@@ -41,7 +44,7 @@ const STORE = new SessionStore({
   },
   collection: "sessions",
 });
-
+// 
 app.use(
   session({
     secret: process.env.SECRET_WEB_TOKEN,
@@ -51,9 +54,10 @@ app.use(
   })
 );
 app.use(flash());
+// serving the static folders public & products folders
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public/products")));
-
+// middlewares for the routes
 app.get("*", checkUser);
 app.post("*", checkUser);
 app.use("/", indexRouter);
@@ -62,6 +66,7 @@ app.use("/users",requireAuth, usersRouter);
 app.use("/", authRouter);
 app.use("/cart", requireAuth, cartRouter);
 app.use("/checkout", requireAuth, checkoutRouter);
+app.use("/wishlist", requireAuth, wishListRouter)
 
 
 // catch 404 and forward to error handler

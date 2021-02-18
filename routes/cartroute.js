@@ -1,7 +1,5 @@
 const { Router } = require('express');
-
 const router = require('express').Router()
-
 const cartController = require('../controllers/cartcontrole')
 
 /* GET cart page. */
